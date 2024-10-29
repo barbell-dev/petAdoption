@@ -10,7 +10,7 @@
   padding-bottom: 5%;
   padding-left: 3%;
   padding-right: 3%;
-  background-color: red;
+  background-color: rgba(245, 245, 220, 0.5);
 }
 .form-parent {
   margin-top: 20px;
@@ -36,5 +36,5 @@ button {
   flex-direction: column;
 }
 label {
-  color: cyan;
+  color: blue;
 }

@@ -5,10 +5,14 @@ body {
   background-image: url("https://t3.ftcdn.net/jpg/04/81/85/46/360_F_481854656_gHGTnBscKXpFEgVTwAT4DL4NXXNhDKU9.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 @media (max-width: 768px) {
   body {
     background-size: contain; /* Use contain to fit the image fully within smaller screens */
     background-position: center;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
   }
 }
