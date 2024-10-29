@@ -1,0 +1,10 @@
+.header {
+  background-color: greenyellow;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 7vh;
+  margin-top: -8px;
+  align-items: center;
+  margin-left: -8px;
+}

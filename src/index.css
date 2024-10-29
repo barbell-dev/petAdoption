@@ -1,0 +1,8 @@
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: url("https://t3.ftcdn.net/jpg/04/81/85/46/360_F_481854656_gHGTnBscKXpFEgVTwAT4DL4NXXNhDKU9.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
