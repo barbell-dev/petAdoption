@@ -9,7 +9,15 @@ export default function Form() {
         </div>
         <div className="element">
           <label>Pet Type</label>
-          <select></select>
+          <select name="petType" id="petType">
+            <option disabled selected>
+              {" "}
+              -- select an option --{" "}
+            </option>
+            <option value={"Shih Tzu"}>{"Shih Tzu"}</option>
+            <option value={"German Shepherd"}>{"German Shepherd"}</option>
+            <option value={"St. Bernard"}>{"St. Bernard"}</option>
+          </select>
         </div>
         <div className="element">
           <label>Breed</label>
