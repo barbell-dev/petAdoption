@@ -8,15 +8,46 @@ export default function Form() {
   const [typingName, setTypingName] = useState(false);
   const [typingEmail, setTypingEmail] = useState(false);
   const [typingPhoneNumber, setTypingPhoneNumber] = useState(false);
+  const [petType, setPetType] = useState(false);
   const navigate = useNavigate();
   function handleSubmit(event) {
     event.preventDefault();
+    // alert(event.target[0]);
     // alert("submitted");
-    navigate("/details");
+    // console.log(event.target.map(i, () => console.log(i)));
+    console.log(event.target[1].value);
+    if (event.target[0].value.length < 3) {
+      alert("Pet name should be minimum 3 characters long.");
+      return;
+    } else if (event.target[1].value == "select") {
+      alert("Please select a valid pet type");
+      return;
+    } else if (event.target[2].value.length < 5) {
+      alert("Pet breed name should be minimum 5 characters long.");
+      return;
+    } else if (event.target[3].value.length < 3) {
+      alert("Your name should be minimum 3 characters long.");
+      return;
+    } else if (event.target[4].value.length < 11) {
+      alert("Your email should be minimum 11 characters long.");
+      return;
+    } else if (event.target[5].value.length < 3) {
+      alert("Your phone number should be minimum 12 characters long.");
+      return;
+    }
+    const data = {
+      0: event.target[0].value,
+      1: event.target[1].value,
+      2: event.target[2].value,
+      3: event.target[3].value,
+      4: event.target[4].value,
+      5: event.target[5].value,
+      6: event.target[6].value,
+    };
+    navigate("/details", { state: { data } });
     // history.push("/details");
   }
   function handleInput(event) {
-    console.log(event.target);
     // alert(event.target.value);
     // console.log(event.target.value);
     if (event.target.id == "petName") {
@@ -31,8 +62,14 @@ export default function Form() {
       } else {
         setTypingName((value) => false);
       }
+    } else if (event.target.id == "petType") {
+      if (event.target.value == "select") {
+        setPetType((value) => true);
+      } else {
+        setPetType((value) => false);
+      }
     } else if (event.target.id == "petBreed") {
-      if (event.target.value.length < 3) {
+      if (event.target.value.length < 5) {
         setTypingPetBreed((value) => true);
       } else {
         setTypingPetBreed((value) => false);
@@ -61,6 +98,7 @@ export default function Form() {
             placeholder="Enter pet name"
             id="petName"
             onFocus={handleInput}
+            onChange={handleInput}
           />
           {typingPetName && <p>Pet name should have at least 3 characters</p>}
         </div>
@@ -81,6 +119,7 @@ export default function Form() {
             <option value={"Cat"}>{"Cat"}</option>
             <option value={"Bird"}>{"Bird"}</option>
           </select>
+          {petType && <p style={{ color: "red" }}>Select a valid pet type</p>}
         </div>
         <div className="element">
           <label>Breed</label>
@@ -93,7 +132,7 @@ export default function Form() {
           />
           {typingPetBreed && (
             <p style={{ color: "red" }}>
-              Breed should have at least 3 characters
+              Breed should have at least 5 characters
             </p>
           )}
         </div>
