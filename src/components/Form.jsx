@@ -3,7 +3,11 @@ import "./Form.css";
 import { useState } from "react";
 
 export default function Form() {
-  const [typing, setTyping] = useState(false);
+  const [typingPetName, setTypingPetName] = useState(false);
+  const [typingPetBreed, setTypingPetBreed] = useState(false);
+  const [typingName, setTypingName] = useState(false);
+  const [typingEmail, setTypingEmail] = useState(false);
+  const [typingPhoneNumber, setTypingPhoneNumber] = useState(false);
   const navigate = useNavigate();
   function handleSubmit(event) {
     event.preventDefault();
@@ -12,17 +16,38 @@ export default function Form() {
     // history.push("/details");
   }
   function handleInput(event) {
-    // console.log(event.target);
+    console.log(event.target);
     // alert(event.target.value);
     // console.log(event.target.value);
     if (event.target.id == "petName") {
       if (event.target.value.length < 3) {
-        setTyping((value) => true);
+        setTypingPetName((value) => true);
       } else {
-        setTyping((value) => false);
+        setTypingPetName((value) => false);
       }
     } else if (event.target.id == "name") {
       if (event.target.value.length < 3) {
+        setTypingName((value) => true);
+      } else {
+        setTypingName((value) => false);
+      }
+    } else if (event.target.id == "petBreed") {
+      if (event.target.value.length < 3) {
+        setTypingPetBreed((value) => true);
+      } else {
+        setTypingPetBreed((value) => false);
+      }
+    } else if (event.target.id == "email") {
+      if (event.target.value.length < 11) {
+        setTypingEmail((value) => true);
+      } else {
+        setTypingEmail((value) => false);
+      }
+    } else if (event.target.id == "phoneNumber") {
+      if (event.target.value.length < 12) {
+        setTypingPhoneNumber((value) => true);
+      } else {
+        setTypingPhoneNumber((value) => false);
       }
     }
   }
@@ -35,9 +60,9 @@ export default function Form() {
             type="text"
             placeholder="Enter pet name"
             id="petName"
-            onChange={handleInput}
+            onFocus={handleInput}
           />
-          {typing && <p>Name should have at least 3 characters</p>}
+          {typingPetName && <p>Pet name should have at least 3 characters</p>}
         </div>
         <div className="element">
           <label>Pet Type</label>
@@ -46,6 +71,7 @@ export default function Form() {
             id="petType"
             defaultValue={"select"}
             onChange={handleInput}
+            onFocus={handleInput}
           >
             <option disabled value={"select"}>
               {" "}
@@ -63,7 +89,13 @@ export default function Form() {
             id="petBreed"
             placeholder="Enter a breed"
             onChange={handleInput}
+            onFocus={handleInput}
           />
+          {typingPetBreed && (
+            <p style={{ color: "red" }}>
+              Breed should have at least 3 characters
+            </p>
+          )}
         </div>
         <div className="element">
           <label>Your Name</label>
@@ -72,7 +104,14 @@ export default function Form() {
             id="name"
             placeholder="Enter your name"
             onChange={handleInput}
+            onFocus={handleInput}
           />
+
+          {typingName && (
+            <p style={{ color: "red" }}>
+              Your name should have at least 3 characters
+            </p>
+          )}
         </div>
         <div className="element">
           <label>Email</label>
@@ -81,7 +120,14 @@ export default function Form() {
             type="text"
             placeholder="Enter your email"
             onChange={handleInput}
+            onFocus={handleInput}
           />
+
+          {typingEmail && (
+            <p style={{ color: "red" }}>
+              Your email should have at least 11 characters
+            </p>
+          )}
         </div>
         <div className="element">
           <label>Phone</label>
@@ -90,8 +136,16 @@ export default function Form() {
             type="text"
             placeholder="Ex: +91xxxxxxxxxx"
             onChange={handleInput}
+            onFocus={handleInput}
           />
         </div>
+
+        {typingPhoneNumber && (
+          <p style={{ color: "red" }}>
+            Your phone number should have at least 12 digits `(including country
+            code)`
+          </p>
+        )}
         <button type="submit" style={{ width: "37%" }}>
           Submit
         </button>
