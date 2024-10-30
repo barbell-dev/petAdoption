@@ -1,16 +1,25 @@
+import { useNavigate } from "react-router-dom";
 import "./Form.css";
+
 export default function Form() {
+  const navigate = useNavigate();
+  function handleSubmit(event) {
+    event.preventDefault();
+    // alert("submitted");
+    navigate("/details");
+    // history.push("/details");
+  }
   return (
     <div className="form-parent">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="element">
           <label>Pet Name</label>
           <input type="text" />
         </div>
         <div className="element">
           <label>Pet Type</label>
-          <select name="petType" id="petType">
-            <option disabled selected>
+          <select name="petType" id="petType" defaultValue={"select"}>
+            <option disabled value={"select"}>
               {" "}
               -- select an option --{" "}
             </option>
