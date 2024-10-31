@@ -10,12 +10,14 @@ export default function Form() {
   const [typingPhoneNumber, setTypingPhoneNumber] = useState(false);
   const [petType, setPetType] = useState(false);
   const navigate = useNavigate();
+  const [overallData, setOverallData] = useState([]);
+
   function handleSubmit(event) {
     event.preventDefault();
     // alert(event.target[0]);
     // alert("submitted");
     // console.log(event.target.map(i, () => console.log(i)));
-    console.log(event.target[1].value);
+    // console.log(event.target[1].value);
     if (event.target[0].value.length < 3) {
       alert("Pet name should be minimum 3 characters long.");
       return;
@@ -31,21 +33,26 @@ export default function Form() {
     } else if (event.target[4].value.length < 11) {
       alert("Your email should be minimum 11 characters long.");
       return;
-    } else if (event.target[5].value.length < 3) {
+    } else if (event.target[5].value.length < 12) {
       alert("Your phone number should be minimum 12 characters long.");
       return;
     }
-    const data = {
-      0: event.target[0].value,
-      1: event.target[1].value,
-      2: event.target[2].value,
-      3: event.target[3].value,
-      4: event.target[4].value,
-      5: event.target[5].value,
-      6: event.target[6].value,
+    const newData = {
+      petName: event.target[0].value,
+      petType: event.target[1].value,
+      petBreed: event.target[2].value,
+      name: event.target[3].value,
+      email: event.target[4].value,
+      phoneNumber: event.target[5].value,
     };
-    navigate("/details", { state: { data } });
-    // history.push("/details");
+    setOverallData((prevData) => {
+      const updatedData = [...prevData, newData];
+      navigate("/details", { state: { overallData: updatedData } });
+      return updatedData;
+    });
+
+    // console.log(overallData);
+    // navigate("/details", { state: { overallData } });
   }
   function handleInput(event) {
     // alert(event.target.value);

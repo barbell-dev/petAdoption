@@ -1,13 +1,10 @@
 import { useLocation } from "react-router-dom";
 import "./Details.css";
+
 export default function Details() {
   const location = useLocation();
-  console.log(location.state.data);
-  const data = [];
-  for (let i = 0; i < Object.keys(location.state.data).length; i++) {
-    data.push(location.state.data[i]);
-  }
-  console.log(data);
+  const data = location.state?.overallData || [];
+
   return (
     <div className="details">
       <table>
@@ -16,17 +13,22 @@ export default function Details() {
             <th>Pet Name</th>
             <th>Pet Type</th>
             <th>Breed</th>
-            <th>Your name</th>
+            <th>Your Name</th>
             <th>Email</th>
             <th>Phone Number</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {data.map((element, i) => {
-              return <td key={i}>{element}</td>;
-            })}
-          </tr>
+          {data.map((entry, index) => (
+            <tr key={index}>
+              <td>{entry.petName}</td>
+              <td>{entry.petType}</td>
+              <td>{entry.petBreed}</td>
+              <td>{entry.name}</td>
+              <td>{entry.email}</td>
+              <td>{entry.phoneNumber}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
