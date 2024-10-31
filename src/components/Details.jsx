@@ -1,13 +1,20 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Details.css";
 
 export default function Details() {
   const location = useLocation();
-  const data = location.state?.overallData || [];
-
+  const data = location.state;
+  // const data = JSON.parse(sessionStorage.getItem("data"));
+  const navigate = useNavigate();
   return (
-    <div className="details">
-      <table>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <table className="details">
         <thead>
           <tr>
             <th>Pet Name</th>
@@ -29,6 +36,13 @@ export default function Details() {
               <td>{entry.phoneNumber}</td>
             </tr>
           ))}
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Go back
+          </button>
         </tbody>
       </table>
     </div>

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, replace, useNavigate } from "react-router-dom";
 import "./Form.css";
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ export default function Form() {
   const [typingPhoneNumber, setTypingPhoneNumber] = useState(false);
   const [petType, setPetType] = useState(false);
   const navigate = useNavigate();
-  const [overallData, setOverallData] = useState([]);
+  // const [overallData, setOverallData] = useState([]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -45,14 +45,16 @@ export default function Form() {
       email: event.target[4].value,
       phoneNumber: event.target[5].value,
     };
-    setOverallData((prevData) => {
-      const updatedData = [...prevData, newData];
-      navigate("/details", { state: { overallData: updatedData } });
-      return updatedData;
-    });
-
+    let existingData = JSON.parse(sessionStorage.getItem("data"));
+    if (existingData == undefined) {
+      existingData = [];
+    }
+    existingData.push(newData);
+    sessionStorage.setItem("data", JSON.stringify(existingData));
+    console.log(existingData);
     // console.log(overallData);
-    // navigate("/details", { state: { overallData } });
+    navigate("/details", { replace: true, state: existingData });
+    // <Link></Link>
   }
   function handleInput(event) {
     // alert(event.target.value);
